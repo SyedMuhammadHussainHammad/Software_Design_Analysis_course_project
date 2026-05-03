@@ -70,6 +70,9 @@ public class IncidentFrame extends JPanel {
                     case "Medium":
                         lbl.setForeground(AppColors.STATUS_YELLOW);
                         break;
+                    case "Resolved":
+                        lbl.setForeground(AppColors.TEXT_MUTED);
+                        break;
                     default:
                         lbl.setForeground(AppColors.STATUS_GREEN);
                         break;
@@ -97,18 +100,22 @@ public class IncidentFrame extends JPanel {
         boolean isAdmin = currentUser.getRole().equals("Admin");
 
         JButton submitBtn = UIFactory.createPrimaryButton("Submit Report");
+        JButton resolveBtn = UIFactory.createSecondaryButton("Resolve");
         JButton deleteBtn = UIFactory.createDangerButton("Delete");
         JButton refreshBtn = UIFactory.createSecondaryButton("Refresh");
 
-        // Only pilots (and admins) can submit; only admins can delete
+        // Only pilots (and admins) can submit; only admins can delete and resolve
         submitBtn.setEnabled(isPilot || isAdmin);
+        resolveBtn.setEnabled(isAdmin);
         deleteBtn.setEnabled(isAdmin);
 
         submitBtn.addActionListener(ignored -> showSubmitDialog());
+        resolveBtn.addActionListener(ignored -> resolveReport());
         deleteBtn.addActionListener(ignored -> deleteReport());
         refreshBtn.addActionListener(ignored -> loadTable());
 
         actBar.add(submitBtn);
+        actBar.add(resolveBtn);
         actBar.add(deleteBtn);
         actBar.add(refreshBtn);
 
@@ -206,6 +213,22 @@ public class IncidentFrame extends JPanel {
         gc.gridx = 1;
         gc.insets = new Insets(6, 0, 2, 0);
         form.add(comp, gc);
+    }
+
+    private void resolveReport() {
+        int row = table.getSelectedRow();
+        if (row < 0) {
+            JOptionPane.showMessageDialog(this, "Select a report to resolve.", "No Selection",
+                    JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        int id = (int) tableModel.getValueAt(row, 0);
+        int confirm = JOptionPane.showConfirmDialog(this,
+                "Resolve report #" + id + "?", "Confirm", JOptionPane.YES_NO_OPTION);
+        if (confirm == JOptionPane.YES_OPTION) {
+            incidentService.resolveReport(id);
+            loadTable();
+        }
     }
 
     private void deleteReport() {

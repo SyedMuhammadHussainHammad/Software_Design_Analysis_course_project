@@ -24,6 +24,16 @@ public class IncidentService {
         return store.getIncidentReports().removeIf(r -> r.getReportId() == reportId);
     }
 
+    public boolean resolveReport(int reportId) {
+        for (IncidentReport r : store.getIncidentReports()) {
+            if (r.getReportId() == reportId) {
+                r.setSeverity("Resolved");
+                return true;
+            }
+        }
+        return false;
+    }
+
     public int generateId() {
         return ++idCounter;
     }
