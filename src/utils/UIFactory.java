@@ -131,7 +131,7 @@ public class UIFactory {
         JButton btn = createRoundedButton(text, AppColors.BG_CARD, AppColors.TEXT_PRIMARY);
         btn.setBorder(BorderFactory.createCompoundBorder(
                 new RoundedBorder(AppColors.BORDER, 12),
-                BorderFactory.createEmptyBorder(10, 20, 10, 20)));
+                BorderFactory.createEmptyBorder(14, 32, 14, 32)));
         addHoverEffect(btn, AppColors.BG_CARD, AppColors.TABLE_SELECT);
         return btn;
     }
@@ -157,19 +157,29 @@ public class UIFactory {
                 Graphics2D g2 = (Graphics2D) g.create();
                 g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
                 g2.setColor(getBackground());
-                g2.fillRoundRect(0, 0, getWidth(), getHeight(), 12, 12);
+                g2.fillRoundRect(1, 1, getWidth() - 3, getHeight() - 3, 12, 12);
                 super.paintComponent(g2);
                 g2.dispose();
             }
+
+            @Override
+            public Dimension getPreferredSize() {
+                Dimension size = super.getPreferredSize();
+                size.width = Math.max(size.width, 140);
+                size.height = 40; // Standardized height of 40px
+                return size;
+            }
         };
         btn.setContentAreaFilled(false);
+        btn.setOpaque(false);
         btn.setBackground(bg);
         btn.setForeground(fg);
         btn.setFont(FONT_BOLD_MD);
         btn.setFocusPainted(false);
         btn.setBorderPainted(false);
         btn.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-        btn.setBorder(BorderFactory.createEmptyBorder(10, 24, 10, 24));
+        btn.setBorder(BorderFactory.createEmptyBorder(14, 32, 14, 32));
+        
         return btn;
     }
 
@@ -285,7 +295,8 @@ public class UIFactory {
             Graphics2D g2 = (Graphics2D) g.create();
             g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
             g2.setColor(color);
-            g2.drawRoundRect(x, y, width - 1, height - 1, radius, radius);
+            // Draw slightly inside the bounds to ensure the border isn't clipped
+            g2.drawRoundRect(x + 1, y + 1, width - 3, height - 3, radius, radius);
             g2.dispose();
         }
     }
