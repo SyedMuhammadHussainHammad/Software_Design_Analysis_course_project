@@ -3,6 +3,7 @@ package model;
 /**
  * Admin extends User — demonstrates INHERITANCE.
  */
+@SuppressWarnings("unused")
 public class Admin extends User {
     private int adminLevel;
 

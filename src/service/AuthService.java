@@ -7,9 +7,10 @@ import java.util.ArrayList;
  * AuthService — Singleton. Manages user authentication.
  * Demonstrates Singleton design pattern.
  */
+@SuppressWarnings("unused")
 public class AuthService {
     private static AuthService instance;
-    private ArrayList<User> users;
+    private final ArrayList<User> users;
 
     private AuthService() {
         users = new ArrayList<>();
@@ -83,19 +84,11 @@ public class AuthService {
         int newId = users.size() + 1;
         User newUser;
         switch (role) {
-            case "Pilot":
-                newUser = new Pilot(newId, name, email, password,
-                        "PK-" + (1000 + newId), 0);
-                break;
-            case "Dispatcher":
-                newUser = new Dispatcher(newId, name, email, password, "Unassigned");
-                break;
-            case "Passenger":
-                newUser = new Passenger(newId, name, email, password, "Pending", "Pending");
-                break;
-            default: // Admin
-                newUser = new Admin(newId, name, email, password, 1);
-                break;
+            case "Pilot" -> newUser = new Pilot(newId, name, email, password,
+                    "PK-" + (1000 + newId), 0);
+            case "Dispatcher" -> newUser = new Dispatcher(newId, name, email, password, "Unassigned");
+            case "Passenger" -> newUser = new Passenger(newId, name, email, password, "Pending", "Pending");
+            default -> newUser = new Admin(newId, name, email, password, 1);
         }
         users.add(newUser);
         return newUser;

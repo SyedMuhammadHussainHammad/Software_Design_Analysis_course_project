@@ -6,6 +6,7 @@ import java.util.ArrayList;
  * FlightSchedule — demonstrates AGGREGATION.
  * Contains a collection of Flights that can exist independently.
  */
+@SuppressWarnings("unused")
 public class FlightSchedule {
     private String scheduleId;
     private ArrayList<Flight> flights;

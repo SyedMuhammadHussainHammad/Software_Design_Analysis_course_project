@@ -3,6 +3,7 @@ package model;
 /**
  * Dispatcher extends User — demonstrates INHERITANCE.
  */
+@SuppressWarnings("unused")
 public class Dispatcher extends User {
     private String station;
 

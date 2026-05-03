@@ -3,6 +3,7 @@ package model;
 /**
  * Represents an incident report submitted by a Pilot.
  */
+@SuppressWarnings("unused")
 public class IncidentReport {
     private int reportId;
     private String flightId;

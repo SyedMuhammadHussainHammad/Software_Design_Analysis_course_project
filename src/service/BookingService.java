@@ -9,8 +9,9 @@ import java.util.UUID;
 /**
  * Handles business logic for flight bookings.
  */
+@SuppressWarnings("unused")
 public class BookingService {
-    private DataStore store = DataStore.getInstance();
+    private final DataStore store = DataStore.getInstance();
 
     public ArrayList<Booking> getBookingsForPassenger(int passengerId) {
         ArrayList<Booking> result = new ArrayList<>();

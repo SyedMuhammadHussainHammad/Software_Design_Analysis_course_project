@@ -7,9 +7,10 @@ import java.util.ArrayList;
 /**
  * CrewService — manages CrewAssignment CRUD.
  */
+@SuppressWarnings("unused")
 public class CrewService {
     private static int idCounter = 10;
-    private DataStore store = DataStore.getInstance();
+    private final DataStore store = DataStore.getInstance();
 
     public ArrayList<CrewAssignment> getAllAssignments() {
         return store.getCrewAssignments();

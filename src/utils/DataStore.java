@@ -10,11 +10,11 @@ import java.util.ArrayList;
 public class DataStore {
     private static DataStore instance;
 
-    private FlightSchedule flightSchedule;
-    private ArrayList<Aircraft> aircraft;
-    private ArrayList<CrewAssignment> crewAssignments;
-    private ArrayList<IncidentReport> incidentReports;
-    private ArrayList<Booking> bookings;
+    private final FlightSchedule flightSchedule;
+    private final ArrayList<Aircraft> aircraft;
+    private final ArrayList<CrewAssignment> crewAssignments;
+    private final ArrayList<IncidentReport> incidentReports;
+    private final ArrayList<Booking> bookings;
 
     private DataStore() {
         flightSchedule = new FlightSchedule("SS-2026");

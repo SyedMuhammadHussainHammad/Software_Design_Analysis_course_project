@@ -6,10 +6,10 @@ import java.time.LocalDateTime;
  * Represents a flight reservation made by a Passenger.
  */
 public class Booking {
-    private String bookingId;
-    private String flightId;
-    private int passengerId;
-    private String bookingDate;
+    private final String bookingId;
+    private final String flightId;
+    private final int passengerId;
+    private final String bookingDate;
     private String status; // e.g., "Confirmed", "Cancelled"
 
     public Booking(String bookingId, String flightId, int passengerId, String status) {

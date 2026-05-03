@@ -8,9 +8,10 @@ import java.util.ArrayList;
 /**
  * FlightService — handles all CRUD operations on Flights and Aircraft.
  */
+@SuppressWarnings("unused")
 public class FlightService {
     private static int flightIdCounter = 200;
-    private DataStore store = DataStore.getInstance();
+    private final DataStore store = DataStore.getInstance();
 
     public ArrayList<Flight> getAllFlights() {
         return store.getFlightSchedule().getAllFlights();

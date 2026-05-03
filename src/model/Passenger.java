@@ -4,6 +4,7 @@ package model;
  * Passenger extends User.
  * Represents a customer who can book flights on the SkyStream platform.
  */
+@SuppressWarnings("unused")
 public class Passenger extends User {
     private String passportNumber;
     private String phoneNumber;

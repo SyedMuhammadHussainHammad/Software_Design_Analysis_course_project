@@ -7,9 +7,10 @@ import java.util.ArrayList;
 /**
  * IncidentService — manages IncidentReport CRUD.
  */
+@SuppressWarnings("unused")
 public class IncidentService {
     private static int idCounter = 10;
-    private DataStore store = DataStore.getInstance();
+    private final DataStore store = DataStore.getInstance();
 
     public ArrayList<IncidentReport> getAllReports() {
         return store.getIncidentReports();

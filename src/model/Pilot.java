@@ -3,6 +3,7 @@ package model;
 /**
  * Pilot extends User — demonstrates INHERITANCE.
  */
+@SuppressWarnings("unused")
 public class Pilot extends User {
     private String licenseNumber;
     private int flightHours;

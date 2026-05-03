@@ -4,6 +4,7 @@ package model;
  * Abstract base class demonstrating INHERITANCE.
  * Pilot, Dispatcher, and Admin all extend User.
  */
+@SuppressWarnings("unused")
 public abstract class User {
     private int id;
     private String name;

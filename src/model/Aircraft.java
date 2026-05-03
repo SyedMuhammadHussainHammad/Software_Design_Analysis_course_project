@@ -4,6 +4,7 @@ package model;
  * Represents an Aircraft.
  * Associated with Flight (Flight HAS-A Aircraft).
  */
+@SuppressWarnings("unused")
 public class Aircraft {
     private String aircraftId;
     private String model;

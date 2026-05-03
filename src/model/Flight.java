@@ -4,6 +4,7 @@ package model;
  * Flight — demonstrates ASSOCIATION (has-a Aircraft)
  * and COMPOSITION (owns a CrewAssignment).
  */
+@SuppressWarnings("unused")
 public class Flight {
     private String flightId;
     private String origin;

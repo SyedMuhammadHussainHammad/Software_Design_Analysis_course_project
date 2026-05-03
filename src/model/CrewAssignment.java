@@ -4,6 +4,7 @@ package model;
  * CrewAssignment — demonstrates COMPOSITION with Flight.
  * A CrewAssignment cannot exist without a Flight.
  */
+@SuppressWarnings("unused")
 public class CrewAssignment {
     private int assignmentId;
     private String flightId;
