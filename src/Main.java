@@ -7,7 +7,7 @@ import javax.swing.*;
  */
 @SuppressWarnings({"unused", "WeakerAccess"})
 public class Main {
-    static void main(String[] args) {
+    public static void main(String[] args) {
         // Set a modern look-and-feel (falls back to system LAF)
         try {
             UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
