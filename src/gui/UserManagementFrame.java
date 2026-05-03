@@ -101,8 +101,8 @@ public class UserManagementFrame extends JPanel {
 
     // ── Add User ─────────────────────────────────────────────────────────────
     private void showAddUserDialog() {
-        Frame owner = (Frame) SwingUtilities.getWindowAncestor(this);
-        SignupDialog dlg = new SignupDialog(owner);
+        // Pass null as owner — SignupDialog is modal and works fine without a parent reference
+        SignupDialog dlg = new SignupDialog(null);
         dlg.setVisible(true);
         loadTable(); // Refresh after dialog closes
     }

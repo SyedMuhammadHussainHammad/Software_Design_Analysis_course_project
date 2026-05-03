@@ -41,11 +41,22 @@ public class FlightManagementFrame extends JPanel {
         topBar.setBackground(AppColors.BG_PANEL);
         topBar.setBorder(new EmptyBorder(18, 24, 18, 24));
 
-        JLabel title = UIFactory.createTitleLabel("Flight Management");
-        topBar.add(title, BorderLayout.WEST);
+        boolean isPilot = currentUser.getRole().equals("Pilot");
+        String frameTitle = isPilot ? "Personal Flight Schedule" : "Flight Management";
+        topBar.add(UIFactory.createTitleLabel(frameTitle), BorderLayout.WEST);
 
         JLabel countLbl = UIFactory.createSubLabel("");
-        topBar.add(countLbl, BorderLayout.EAST);
+        if (isPilot) {
+            JLabel readOnlyBadge = UIFactory.createSubLabel("  Read-Only View");
+            readOnlyBadge.setForeground(utils.AppColors.STATUS_YELLOW);
+            JPanel east = new JPanel(new FlowLayout(FlowLayout.RIGHT, 8, 0));
+            east.setOpaque(false);
+            east.add(readOnlyBadge);
+            east.add(countLbl);
+            topBar.add(east, BorderLayout.EAST);
+        } else {
+            topBar.add(countLbl, BorderLayout.EAST);
+        }
         add(topBar, BorderLayout.NORTH);
 
         // ── Table ─────────────────────────────────────────────────────────
