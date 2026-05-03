@@ -183,6 +183,7 @@ public class UIFactory {
     }
 
     // ─── Panels ─────────────────────────────────────────────────────────────
+    @SuppressWarnings("unused")
     public static JPanel createDarkPanel() {
         JPanel p = new JPanel();
         p.setBackground(AppColors.BG_PANEL);
@@ -261,8 +262,8 @@ public class UIFactory {
 
     // ─── Utility Class for Rounded Borders ──────────────────────────────────
     private static class RoundedBorder implements Border {
-        private int radius;
-        private Color color;
+        private final int radius;
+        private final Color color;
 
         RoundedBorder(Color color, int radius) {
             this.color = color;

@@ -56,7 +56,7 @@ public class IncidentFrame extends JPanel {
         table.getColumnModel().getColumn(5).setPreferredWidth(280);
 
         // Colour-code severity column
-        table.getColumnModel().getColumn(3).setCellRenderer((t, value, isSelected, hasFocus, row, col) -> {
+        table.getColumnModel().getColumn(3).setCellRenderer((ignoredT, value, isSelected, ignoredHasFocus, row, ignoredCol) -> {
             JLabel lbl = new JLabel(value != null ? value.toString() : "");
             lbl.setOpaque(true);
             lbl.setBorder(BorderFactory.createEmptyBorder(0, 10, 0, 10));
@@ -104,9 +104,9 @@ public class IncidentFrame extends JPanel {
         submitBtn.setEnabled(isPilot || isAdmin);
         deleteBtn.setEnabled(isAdmin);
 
-        submitBtn.addActionListener(e -> showSubmitDialog());
-        deleteBtn.addActionListener(e -> deleteReport());
-        refreshBtn.addActionListener(e -> loadTable());
+        submitBtn.addActionListener(ignored -> showSubmitDialog());
+        deleteBtn.addActionListener(ignored -> deleteReport());
+        refreshBtn.addActionListener(ignored -> loadTable());
 
         actBar.add(submitBtn);
         actBar.add(deleteBtn);
@@ -173,7 +173,7 @@ public class IncidentFrame extends JPanel {
         gc.insets = new Insets(18, 0, 0, 0);
         form.add(saveBtn, gc);
 
-        saveBtn.addActionListener(e -> {
+        saveBtn.addActionListener(ignored -> {
             String fId = (String) flightCb.getSelectedItem();
             String sev = (String) severityCb.getSelectedItem();
             String desc = descArea.getText().trim();

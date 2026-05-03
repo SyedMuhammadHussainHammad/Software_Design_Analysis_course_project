@@ -73,9 +73,9 @@ public class CrewAssignmentFrame extends JPanel {
         assignBtn.setEnabled(canEdit);
         removeBtn.setEnabled(canEdit);
 
-        assignBtn.addActionListener(e -> showAssignDialog());
-        removeBtn.addActionListener(e -> removeAssignment());
-        refreshBtn.addActionListener(e -> loadTable());
+        assignBtn.addActionListener(ignored -> showAssignDialog());
+        removeBtn.addActionListener(ignored -> removeAssignment());
+        refreshBtn.addActionListener(ignored -> loadTable());
 
         actBar.add(assignBtn);
         actBar.add(removeBtn);
@@ -143,7 +143,7 @@ public class CrewAssignmentFrame extends JPanel {
         gc.insets = new Insets(16, 0, 0, 0);
         form.add(saveBtn, gc);
 
-        saveBtn.addActionListener(e -> {
+        saveBtn.addActionListener(ignored -> {
             String fId = (String) flightCb.getSelectedItem();
             String pilot = (String) pilotCb.getSelectedItem();
             String disp = (String) dispCb.getSelectedItem();

@@ -73,7 +73,7 @@ public class BookingFrame extends JPanel {
         formCard.add(destCb);
 
         JButton searchBtn = UIFactory.createPrimaryButton("Search Flights");
-        searchBtn.addActionListener(e -> doSearch());
+        searchBtn.addActionListener(ignored -> doSearch());
         formCard.add(searchBtn);
 
         searchPanel.add(formCard, BorderLayout.CENTER);
@@ -99,7 +99,7 @@ public class BookingFrame extends JPanel {
 
         JButton bookBtn = UIFactory.createPrimaryButton("Book Selected Flight");
         bookBtn.setBackground(AppColors.ACCENT_TEAL); // Gold highlight
-        bookBtn.addActionListener(e -> bookFlight());
+        bookBtn.addActionListener(ignored -> bookFlight());
         JPanel bookPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
         bookPanel.setOpaque(false);
         bookPanel.add(bookBtn);
@@ -127,7 +127,7 @@ public class BookingFrame extends JPanel {
         myBookingsPanel.add(UIFactory.createStyledScrollPane(myBookingsTable), BorderLayout.CENTER);
 
         JButton cancelBtn = UIFactory.createDangerButton("Cancel Booking");
-        cancelBtn.addActionListener(e -> cancelBooking());
+        cancelBtn.addActionListener(ignored -> cancelBooking());
         JPanel cancelPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
         cancelPanel.setOpaque(false);
         cancelPanel.add(cancelBtn);
@@ -146,9 +146,9 @@ public class BookingFrame extends JPanel {
 
         searchTableModel.setRowCount(0);
         for (Flight f : flightService.getAllFlights()) {
-            boolean matchO = o.equals("Any") || f.getOrigin().equals(o);
-            boolean matchD = d.equals("Any") || f.getDestination().equals(d);
-            if (matchO && matchD && f.getStatus().equals("Scheduled")) {
+            boolean matchO = "Any".equals(o) || (o != null && o.equals(f.getOrigin()));
+            boolean matchD = "Any".equals(d) || (d != null && d.equals(f.getDestination()));
+            if (matchO && matchD && "Scheduled".equals(f.getStatus())) {
                 searchTableModel.addRow(new Object[]{
                         f.getFlightId(), f.getOrigin(), f.getDestination(),
                         f.getDepartureTime(), f.getArrivalTime(), f.getStatus()

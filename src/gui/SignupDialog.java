@@ -96,13 +96,13 @@ public class SignupDialog extends JDialog {
         registerBtn.setBackground(AppColors.ACCENT_TEAL);
         registerBtn.setAlignmentX(Component.LEFT_ALIGNMENT);
         registerBtn.setMaximumSize(new Dimension(Integer.MAX_VALUE, 44));
-        registerBtn.addActionListener(e -> attemptRegister());
+        registerBtn.addActionListener(ignored -> attemptRegister());
 
         // Cancel button
         JButton cancelBtn = UIFactory.createSecondaryButton("Cancel");
         cancelBtn.setAlignmentX(Component.LEFT_ALIGNMENT);
         cancelBtn.setMaximumSize(new Dimension(Integer.MAX_VALUE, 40));
-        cancelBtn.addActionListener(e -> dispose());
+        cancelBtn.addActionListener(ignored -> dispose());
 
         // ── Assemble ────────────────────────────────────────────────────────
         card.add(nameLbl);

@@ -14,7 +14,7 @@ import java.awt.*;
  */
 public class DashboardFrame extends JFrame {
 
-    private User currentUser;
+    private final User currentUser;
     private JPanel contentArea;
 
     private FlightManagementFrame flightFrame;
@@ -57,7 +57,7 @@ public class DashboardFrame extends JFrame {
         headerRight.add(userLbl);
 
         JButton logoutBtn = UIFactory.createSecondaryButton("Logout");
-        logoutBtn.addActionListener(e -> {
+        logoutBtn.addActionListener(ignored -> {
             dispose();
             SwingUtilities.invokeLater(() -> new LoginFrame().setVisible(true));
         });
@@ -75,7 +75,7 @@ public class DashboardFrame extends JFrame {
 
         sidebar.add(Box.createRigidArea(new Dimension(0, 18)));
         sidebar.add(makeSidebarSection("MENU"));
-        sidebar.add(makeSidebarBtn("Dashboard", () -> showWelcome()));
+        sidebar.add(makeSidebarBtn("Dashboard", this::showWelcome));
 
         if (currentUser.getRole().equals("Passenger")) {
             sidebar.add(makeSidebarBtn("Book Flights", () -> showFrame(getBookingFrame())));
@@ -109,6 +109,7 @@ public class DashboardFrame extends JFrame {
 
     // ── Helpers ─────────────────────────────────────────────────────────────
 
+    @SuppressWarnings("SameParameterValue")
     private JLabel makeSidebarSection(String text) {
         JLabel lbl = new JLabel("  " + text);
         lbl.setFont(new Font("Segoe UI", Font.BOLD, 10));
@@ -122,7 +123,7 @@ public class DashboardFrame extends JFrame {
         JButton btn = UIFactory.createSidebarButton(text);
         btn.setMaximumSize(new Dimension(Integer.MAX_VALUE, 46));
         btn.setAlignmentX(Component.LEFT_ALIGNMENT);
-        btn.addActionListener(e -> action.run());
+        btn.addActionListener(ignored -> action.run());
         return btn;
     }
 

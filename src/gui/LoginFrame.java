@@ -18,7 +18,6 @@ public class LoginFrame extends JFrame {
 
     private JTextField emailField;
     private JPasswordField passwordField;
-    private JButton loginBtn;
     private JLabel statusLabel;
 
     public LoginFrame() {
@@ -74,10 +73,10 @@ public class LoginFrame extends JFrame {
         passwordField.setAlignmentX(Component.LEFT_ALIGNMENT);
 
         // Login button
-        loginBtn = UIFactory.createPrimaryButton("  LOGIN  ");
+        JButton loginBtn = UIFactory.createPrimaryButton("  LOGIN  ");
         loginBtn.setAlignmentX(Component.LEFT_ALIGNMENT);
         loginBtn.setMaximumSize(new Dimension(Integer.MAX_VALUE, 44));
-        loginBtn.addActionListener(e -> attemptLogin());
+        loginBtn.addActionListener(ignored -> attemptLogin());
 
         // Enter key triggers login
         passwordField.addKeyListener(new KeyAdapter() {
@@ -119,7 +118,7 @@ public class LoginFrame extends JFrame {
         createAccBtn.setAlignmentX(Component.LEFT_ALIGNMENT);
         createAccBtn.setMaximumSize(new Dimension(Integer.MAX_VALUE, 40));
         createAccBtn.setForeground(AppColors.ACCENT_TEAL);
-        createAccBtn.addActionListener(e -> new SignupDialog(this).setVisible(true));
+        createAccBtn.addActionListener(ignored -> new SignupDialog(this).setVisible(true));
         card.add(createAccBtn);
 
         card.add(Box.createRigidArea(new Dimension(0, 20)));

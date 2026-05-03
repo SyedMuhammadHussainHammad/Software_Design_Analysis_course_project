@@ -86,10 +86,10 @@ public class FlightManagementFrame extends JPanel {
         editBtn.setEnabled(canEdit);
         deleteBtn.setEnabled(canEdit);
 
-        addBtn.addActionListener(e -> showAddDialog());
-        editBtn.addActionListener(e -> showEditDialog());
-        deleteBtn.addActionListener(e -> deleteFlight());
-        refreshBtn.addActionListener(e -> loadTable(countLbl));
+        addBtn.addActionListener(ignored -> showAddDialog());
+        editBtn.addActionListener(ignored -> showEditDialog());
+        deleteBtn.addActionListener(ignored -> deleteFlight());
+        refreshBtn.addActionListener(ignored -> loadTable(countLbl));
 
         actionBar.add(addBtn);
         actionBar.add(editBtn);
@@ -204,7 +204,7 @@ public class FlightManagementFrame extends JPanel {
         gc.insets = new Insets(16, 0, 0, 0);
         form.add(saveBtn, gc);
 
-        saveBtn.addActionListener(e -> {
+        saveBtn.addActionListener(ignored -> {
             String origin = originFld.getText().trim();
             String dest = destFld.getText().trim();
             String dep = depFld.getText().trim();
