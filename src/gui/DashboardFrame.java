@@ -2,7 +2,7 @@ package gui;
 
 import model.User;
 import utils.AppColors;
-import utils.UIFactory;
+import gui.UserManagementFrame;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -39,8 +39,8 @@ public class DashboardFrame extends JFrame {
         // ── Header bar ────────────────────────────────────────────────────
         JPanel header = new JPanel(new BorderLayout());
         header.setBackground(AppColors.BG_SIDEBAR);
-        header.setBorder(new EmptyBorder(14, 24, 14, 24));
-        header.setPreferredSize(new Dimension(0, 60));
+        header.setBorder(new EmptyBorder(15, 24, 15, 24));
+        // Removed fixed height to ensure proper vertical overflow and alignment
 
         JLabel brandLbl = new JLabel("SkyStream");
         brandLbl.setFont(new Font("Segoe UI", Font.BOLD, 18));
@@ -77,12 +77,26 @@ public class DashboardFrame extends JFrame {
         sidebar.add(makeSidebarSection("MENU"));
         sidebar.add(makeSidebarBtn("Dashboard", this::showWelcome));
 
-        if (currentUser.getRole().equals("Passenger")) {
-            sidebar.add(makeSidebarBtn("Book Flights", () -> showFrame(getBookingFrame())));
-        } else {
+        // Role-based sidebar navigation
+        if (currentUser.getRole().equals("Admin")) {
+            // Admin: Full suite
             sidebar.add(makeSidebarBtn("Flights", () -> showFrame(getFlightFrame())));
             sidebar.add(makeSidebarBtn("Crew Assign", () -> showFrame(getCrewFrame())));
             sidebar.add(makeSidebarBtn("Incidents", () -> showFrame(getIncidentFrame())));
+            sidebar.add(makeSidebarBtn("User Management", () -> showFrame(getUserManagementFrame())));
+        } else if (currentUser.getRole().equals("Dispatcher")) {
+            // Dispatcher: Flights, Crew, view incidents only
+            sidebar.add(makeSidebarBtn("Flights", () -> showFrame(getFlightFrame())));
+            sidebar.add(makeSidebarBtn("Crew Assign", () -> showFrame(getCrewFrame())));
+            sidebar.add(makeSidebarBtn("Incidents", () -> showFrame(getIncidentFrame())));
+        } else if (currentUser.getRole().equals("Pilot")) {
+            // Pilot: Read‑only flight schedule and crew list
+            sidebar.add(makeSidebarBtn("My Schedule", () -> showFrame(getFlightFrame())));
+            sidebar.add(makeSidebarBtn("Crew List", () -> showFrame(getCrewFrame())));
+            sidebar.add(makeSidebarBtn("Incidents", () -> showFrame(getIncidentFrame())));
+        } else {
+            // Passenger: Booking only
+            sidebar.add(makeSidebarBtn("Book Flights", () -> showFrame(getBookingFrame())));
         }
         
         sidebar.add(Box.createVerticalGlue());
@@ -169,10 +183,12 @@ public class DashboardFrame extends JFrame {
     }
 
     // Lazy-init sub-frames so they share state
-    private FlightManagementFrame getFlightFrame() {
-        if (flightFrame == null)
-            flightFrame = new FlightManagementFrame(currentUser);
-        return flightFrame;
+    private UserManagementFrame userManagementFrame;
+
+    private UserManagementFrame getUserManagementFrame() {
+        if (userManagementFrame == null)
+            userManagementFrame = new UserManagementFrame(currentUser);
+        return userManagementFrame;
     }
 
     private CrewAssignmentFrame getCrewFrame() {
