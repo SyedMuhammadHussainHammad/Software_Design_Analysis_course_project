@@ -56,7 +56,7 @@ public class DashboardFrame extends JFrame {
         userLbl.setFont(new Font("Segoe UI", Font.PLAIN, 13));
         headerRight.add(userLbl);
 
-        JButton logoutBtn = UIFactory.createSecondaryButton("Logout");
+        JButton logoutBtn = UIFactory.createDangerButton("Logout");
         logoutBtn.addActionListener(ignored -> {
             dispose();
             SwingUtilities.invokeLater(() -> new LoginFrame().setVisible(true));
