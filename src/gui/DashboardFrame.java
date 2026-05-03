@@ -2,7 +2,7 @@ package gui;
 
 import model.User;
 import utils.AppColors;
-import gui.UserManagementFrame;
+import utils.UIFactory;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -183,6 +183,12 @@ public class DashboardFrame extends JFrame {
     }
 
     // Lazy-init sub-frames so they share state
+    private FlightManagementFrame getFlightFrame() {
+        if (flightFrame == null)
+            flightFrame = new FlightManagementFrame(currentUser);
+        return flightFrame;
+    }
+
     private UserManagementFrame userManagementFrame;
 
     private UserManagementFrame getUserManagementFrame() {

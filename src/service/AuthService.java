@@ -93,4 +93,28 @@ public class AuthService {
         users.add(newUser);
         return newUser;
     }
+
+    /**
+     * Deletes a user by ID. Prevents deletion of the last Admin account.
+     * Returns true if successfully deleted, false otherwise.
+     */
+    public boolean deleteUser(int userId) {
+        User toRemove = null;
+        for (User u : users) {
+            if (u.getId() == userId) {
+                toRemove = u;
+                break;
+            }
+        }
+        if (toRemove == null) return false;
+
+        // Guard: don't delete the last admin
+        if (toRemove.getRole().equals("Admin")) {
+            long adminCount = users.stream().filter(u -> u.getRole().equals("Admin")).count();
+            if (adminCount <= 1) return false;
+        }
+
+        users.remove(toRemove);
+        return true;
+    }
 }
