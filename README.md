@@ -26,7 +26,7 @@ The system is role-based. Depending on your role, you have different access leve
 | **Admin** | `admin@sky.com` | `admin123` | Full access. Can add/edit/delete flights, assign/remove crew, and delete incident reports. |
 | **Dispatcher** | `dispatch@sky.com` | `disp123` | High access. Can add/edit/delete flights and assign crew. View-only access to incident reports. |
 | **Pilot** | `pilot@sky.com` | `pilot123` | Read-only access to flights and crew assignments. Can submit incident reports. |
-| **Pilot** | `sara@sky.com` | `sara123` | Same as above. |
+| **Passenger** | `passenger@sky.com` | `pass123` | Customer access. Can search for flights, book flights, and cancel their reservations. |
 
 *Note: You can also use the **"CREATE ACCOUNT"** button on the login screen to register a new user of any role.*
 
@@ -49,12 +49,17 @@ The system is role-based. Depending on your role, you have different access leve
 - **Roles:** Pilots (and Admins) can submit reports. Admins can delete reports. Dispatchers have view-only access.
 - **Data:** Tracks Flight ID, severity (color-coded as Low/Medium/High), date, and a description.
 
+### 5. Passenger Booking System (`BookingService`, `BookingFrame`)
+- **Working:** Allows passengers to search available flights, make reservations, and manage their bookings.
+- **Roles:** Exclusive dashboard for Passengers.
+- **Data:** Tracks Booking ID, Flight ID, Passenger ID, Date, and booking Status.
+
 ## 🏗️ Architecture & Design Patterns
 
 - **Language:** 100% Java.
 - **UI Framework:** Java Swing, customized extensively via `UIFactory` and `AppColors` for a premium dark mode aesthetic.
 - **Layered Architecture:**
-  - `model`: POJOs representing the domain (User, Flight, Aircraft, etc.).
+  - `model`: POJOs representing the domain (User, Passenger, Flight, Booking, Aircraft, etc.).
   - `service`: Business logic handling CRUD operations.
   - `gui`: All visual components.
   - `utils`: Helpers like the `DataStore` and UI Factories.
