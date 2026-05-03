@@ -282,7 +282,9 @@ public class UIFactory {
 
         @Override
         public Insets getBorderInsets(Component c) {
-            return new Insets(radius + 1, radius + 1, radius + 1, radius + 1);
+            // Only 1px inset — this is a decorative stroke border.
+            // Actual text padding is provided by the inner EmptyBorder in the compound border.
+            return new Insets(1, 1, 1, 1);
         }
 
         @Override

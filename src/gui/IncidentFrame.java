@@ -101,7 +101,7 @@ public class IncidentFrame extends JPanel {
 
         JButton submitBtn = UIFactory.createPrimaryButton("Submit Report");
         JButton resolveBtn = UIFactory.createSecondaryButton("Resolve");
-        JButton deleteBtn = UIFactory.createDangerButton("Delete");
+        JButton deleteBtn  = UIFactory.createDangerButton("Delete");
         JButton refreshBtn = UIFactory.createSecondaryButton("Refresh");
 
         // Only pilots (and admins) can submit; only admins can delete and resolve
@@ -114,15 +114,36 @@ public class IncidentFrame extends JPanel {
         deleteBtn.addActionListener(ignored -> deleteReport());
         refreshBtn.addActionListener(ignored -> loadTable());
 
-        actBar.add(submitBtn);
-        actBar.add(resolveBtn);
-        actBar.add(deleteBtn);
-        actBar.add(refreshBtn);
-
-        if (!isPilot && !isAdmin) {
-            actBar.add(UIFactory.createSubLabel("  (View-only for Dispatchers)"));
+        if (isPilot) {
+            // Pilots: give Submit Report a highly prominent teal accent and place it first
+            submitBtn.setBackground(AppColors.ACCENT_TEAL);
+            submitBtn.setForeground(Color.WHITE);
+            // Prominent call-to-action banner above the table buttons
+            JPanel pilotBanner = new JPanel(new FlowLayout(FlowLayout.LEFT, 12, 8));
+            pilotBanner.setBackground(new Color(20, 60, 60));
+            pilotBanner.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 0, 1, 0, AppColors.ACCENT_TEAL));
+            JLabel bannerLbl = UIFactory.createSubLabel("  As a Pilot, you can submit incident reports for any flight you are assigned to.");
+            bannerLbl.setForeground(AppColors.ACCENT_TEAL);
+            pilotBanner.add(bannerLbl);
+            add(pilotBanner, BorderLayout.SOUTH);
+            actBar.add(submitBtn);
+            actBar.add(refreshBtn);
+            // Replace SOUTH with a compound panel: banner on top, actBar below
+            JPanel southCompound = new JPanel(new BorderLayout());
+            southCompound.setBackground(AppColors.BG_DARK);
+            southCompound.add(pilotBanner, BorderLayout.NORTH);
+            southCompound.add(actBar, BorderLayout.CENTER);
+            add(southCompound, BorderLayout.SOUTH);
+        } else {
+            actBar.add(submitBtn);
+            actBar.add(resolveBtn);
+            actBar.add(deleteBtn);
+            actBar.add(refreshBtn);
+            if (!isAdmin) {
+                actBar.add(UIFactory.createSubLabel("  (View-only — Dispatcher access)"));
+            }
+            add(actBar, BorderLayout.SOUTH);
         }
-        add(actBar, BorderLayout.SOUTH);
         loadTable();
     }
 

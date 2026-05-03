@@ -35,10 +35,17 @@ public class CrewAssignmentFrame extends JPanel {
 
     private void initComponents() {
         // ── Title ─────────────────────────────────────────────────────────
+        boolean isPilot = currentUser.getRole().equals("Pilot");
         JPanel topBar = new JPanel(new BorderLayout());
         topBar.setBackground(AppColors.BG_PANEL);
         topBar.setBorder(new EmptyBorder(18, 24, 18, 24));
-        topBar.add(UIFactory.createTitleLabel("Crew Assignments"), BorderLayout.WEST);
+        String frameTitle = isPilot ? "Crew List" : "Crew Assignments";
+        topBar.add(UIFactory.createTitleLabel(frameTitle), BorderLayout.WEST);
+        if (isPilot) {
+            JLabel badge = UIFactory.createSubLabel("  Read-Only View");
+            badge.setForeground(utils.AppColors.STATUS_YELLOW);
+            topBar.add(badge, BorderLayout.EAST);
+        }
         add(topBar, BorderLayout.NORTH);
 
         // ── Table ─────────────────────────────────────────────────────────
